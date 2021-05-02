@@ -1,4 +1,4 @@
-// import java.awt.BorderLayout; (par défaut)
+
 
 import java.awt.BorderLayout;
 

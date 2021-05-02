@@ -48,6 +48,7 @@ public class Controleur
         this.metier.ajouterCompte(sRet);
         this.ihm.maj();
     }
+    public void removeAccount() {this.metier.deleteCompte(this.metier.getNum());}
 
 
     public static void main(String[] args)

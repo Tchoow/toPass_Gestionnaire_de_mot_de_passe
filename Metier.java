@@ -2,6 +2,7 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList; 
+import java.awt.datatransfer.*;
 
 public class Metier
 {
@@ -59,6 +60,7 @@ public class Metier
 
     public MotDePasse getPasswordIndice(int indice) { return this.ensMdp.get(indice) ; }
     public int getNbPassword() { return this.ensMdp.size(); }
+    public int getNum()        { return this.num;           }
     public String getName()    { return this.name;          }
     public String getLink()    { return this.link;          }
     public String getId  ()    { return this.id;            }
@@ -78,4 +80,8 @@ public class Metier
         }
     }
 
+    public void deleteCompte(int numCompte)
+    {
+      System.out.println("A FAIRE");
+    }
 }

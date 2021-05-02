@@ -4,7 +4,14 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-public class PanelMain extends JPanel
+import java.awt.event.*;
+
+import java.awt.datatransfer.*;
+import java.io.*;
+import java.awt.Toolkit;
+
+
+public class PanelMain extends JPanel implements ActionListener
 {
     private Controleur ctrl;
     private JLabel[]     ensJLabels;
@@ -62,12 +69,46 @@ public class PanelMain extends JPanel
             this.add (this.panelMdpCopy[i]);
         }
 
+		/*----------------------------------------*/
+		/* Activation des composants              */
+		/*----------------------------------------*/
+
+        for( int i =0; i < 4; i++)
+        {
+            this.ensBtnCopy[i].addActionListener( this );
+        }
 
         //Colors
         this.setBackground( new Color(233, 126, 126) );
 
     }
 
+
+    public void actionPerformed(ActionEvent e)
+    {
+        Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection testData;
+        if ( e.getSource() == this.ensBtnCopy[0] )
+        {
+            testData = new StringSelection( this.ctrl.getLink() );
+            c.setContents(testData, testData);
+        }
+
+        if ( e.getSource() == this.ensBtnCopy[1] )
+        {
+            testData = new StringSelection( this.ctrl.getId() );
+            c.setContents(testData, testData);
+        }
+
+        if ( e.getSource() == this.ensBtnCopy[2] )
+        {
+            testData = new StringSelection( this.ctrl.getMdp() );
+            c.setContents(testData, testData);
+        }
+
+        if ( e.getSource() == this.ensBtnCopy[3] ) this.ctrl.removeAccount();
+        
+    }
 
     public void setLink(String link) { this.ensTextFields[0].setText(link);}
     public void setId  (String id  ) { this.ensTextFields[1].setText(id)  ;}
