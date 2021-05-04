@@ -3,8 +3,9 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.*;
+import java.awt.event.*;
 
-public class PanelAddMdp extends JPanel
+public class PanelAddMdp extends JPanel implements ActionListener
 {
     private Controleur ctrl;
     private JTextField[] txtInfo;
@@ -25,8 +26,11 @@ public class PanelAddMdp extends JPanel
 
         this.txtInfo             = new JTextField[5];
         this.lblInfo             = new JLabel[5];
-        this.pnlPassword         = new JPanel( new BorderLayout() );
-        this.btnGeneratePassword = new JButton( "Gpass");
+        this.pnlPassword         = new JPanel( new BorderLayout(5, 5) );
+        this.btnGeneratePassword = new JButton( "auto");
+        this.btnGeneratePassword.setBackground( Color.YELLOW );
+        this.btnGeneratePassword.setForeground(Color.GRAY);
+
 
         for (int i = 0 ; i < 5; i++)
         {
@@ -58,10 +62,14 @@ public class PanelAddMdp extends JPanel
 
         }
 
-
+		/*----------------------------------------*/
+		/* Activation des composants              */
+		/*----------------------------------------*/
+        this.btnGeneratePassword.addActionListener( this );
 
 
         // Colors
+        this.pnlPassword.setBackground( new Color(233, 126, 126) );
         this.setBackground( new Color(233, 126, 126) );
 
     }
@@ -70,4 +78,15 @@ public class PanelAddMdp extends JPanel
     public String getId()   { return this.txtInfo[2].getText(); }
     public String getMdp()  { return this.txtInfo[3].getText(); }
     public String getNote() { return this.txtInfo[4].getText(); }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        if ( e.getSource() == this.btnGeneratePassword )
+        {
+            String mdp;
+
+            mdp = this.ctrl.generate();
+            this.txtInfo[3].setText(mdp);
+        }
+    }
 }

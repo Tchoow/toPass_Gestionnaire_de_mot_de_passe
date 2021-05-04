@@ -54,7 +54,7 @@ public class Controleur
     }
     
     public void removeAccount() {this.metier.deleteCompte(this.metier.getNum());}
-
+    public String generate() { return this.metier.generate() ;}
 
     public static void main(String[] args)
     {
