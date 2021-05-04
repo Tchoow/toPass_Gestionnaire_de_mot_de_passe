@@ -35,6 +35,7 @@ public class PanelMain extends JPanel implements ActionListener
         this.ensBtnCopy    = new JButton[4];
         this.lblPassword   = new JPasswordField();
         this.lblPassword.setFont( new Font ("Arial", Font.PLAIN, 20));
+        this.lblPassword.setEditable( false );
 
 
         for (int i =0; i < 4; i++)
@@ -52,10 +53,23 @@ public class PanelMain extends JPanel implements ActionListener
 
 
 
-            if (i <  3) this.ensBtnCopy[i] = new JButton("copy");
-            else this.ensBtnCopy[i] = new JButton("supprimer compte");
+            if (i <  3)
+            {
+                this.ensBtnCopy[i] = new JButton("Copier");
+                this.ensBtnCopy[i].setBackground( new Color(158, 158, 158));
+                this.ensBtnCopy[i].setForeground( Color.DARK_GRAY );
+            }
+            else
+            {
+                this.ensBtnCopy[i] = new JButton("Supprimer compte");
+                this.ensBtnCopy[i].setForeground( Color.white );
+                this.ensBtnCopy[i].setBackground( new Color(186, 30, 30));
 
-            this.ensBtnCopy[i].setBackground( new Color(158, 158, 158));
+            }
+
+            this.ensBtnCopy[i].setFont( new Font ("Arial", Font.PLAIN, 20));
+
+
 
             this.panelMdpCopy[i] = new JPanel( new BorderLayout ());
 

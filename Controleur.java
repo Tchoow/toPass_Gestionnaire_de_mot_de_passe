@@ -14,6 +14,7 @@ public class Controleur
 
     // Accesseurs
     public int getNbPassword() { return this.metier.getNbPassword(); }
+    public int getNum() { return this.metier.getNum() ;}
     public String getName()    { return this.metier.getName();       }
     public String getLink()    { return this.metier.getLink();       }
     public String getId  ()    { return this.metier.getId();         }
@@ -53,7 +54,12 @@ public class Controleur
         this.ihm.maj();
     }
     
-    public void removeAccount() {this.metier.deleteCompte(this.metier.getNum());}
+    public void removeAccount()
+    {
+        this.metier.deleteCompte(this.metier.getNum());
+        this.actualisationDeux();
+    
+    }
     public String generate() { return this.metier.generate() ;}
 
     public static void main(String[] args)

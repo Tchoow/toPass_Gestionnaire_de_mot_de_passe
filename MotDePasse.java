@@ -1,8 +1,6 @@
 public class MotDePasse
 {
     // Attributs
-    private static int nbMotDePasse = 0;
-
     private int    num;
     private String name;
     private String link;
@@ -11,9 +9,9 @@ public class MotDePasse
     private String note;
 
 
-    public MotDePasse(String name, String link, String id, String mdp, String note)
+    public MotDePasse(int num, String name, String link, String id, String mdp, String note)
     {
-        this.num = ++MotDePasse.nbMotDePasse;
+        this.num     = num;
         this.name    = name;
         this.link    = link;
         this.id      = id;
@@ -28,4 +26,7 @@ public class MotDePasse
     public String getId()  { return this.id;   }
     public String getMdp() { return this.mdp;  }
     public String getNote(){ return this.note; }
+
+    
+
 }
