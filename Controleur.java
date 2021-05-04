@@ -21,6 +21,10 @@ public class Controleur
     public String getNote()    { return this.metier.getNote();       }
     public MotDePasse getPasswordIndice(int indice) { return this.metier.getPasswordIndice(indice); }
 
+
+    public String encode(String str) { return this.metier.encode( str ); }
+    public String decode(String str) { return this.metier.decode( str ); }
+
     public void actualisation(int index)
     {
         this.metier.setCurrentAccount(index);
@@ -48,6 +52,7 @@ public class Controleur
         this.metier.ajouterCompte(sRet);
         this.ihm.maj();
     }
+    
     public void removeAccount() {this.metier.deleteCompte(this.metier.getNum());}
 
 

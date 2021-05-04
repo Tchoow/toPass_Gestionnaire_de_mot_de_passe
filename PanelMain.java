@@ -13,17 +13,17 @@ import java.awt.Toolkit;
 
 public class PanelMain extends JPanel implements ActionListener
 {
-    private Controleur ctrl;
-    private JLabel[]     ensJLabels;
-    private JTextField[] ensTextFields;
-    private String[] txtLabel = {"Lien:", "Identifiant:", "Mot de passe:", "Informations supp:"};
-    private JPanel[] panelMdpCopy;
-    private JButton[] ensBtnCopy;
+    private Controleur     ctrl;
+    private JLabel[]       ensJLabels;
+    private JTextField[]   ensTextFields;
+    private String[]       txtLabel = {"Lien:", "Identifiant:", "Mot de passe:", "Informations supp:"};
+    private JPanel[]       panelMdpCopy;
+    private JButton[]      ensBtnCopy;
+    private JPasswordField lblPassword;
 
     public PanelMain( Controleur ctrl)
     {
         this.ctrl = ctrl;
-
         this.setLayout ( new GridLayout( 4, 2, 10, 10 ) );
 
 		/*----------------------------*/
@@ -33,6 +33,8 @@ public class PanelMain extends JPanel implements ActionListener
         this.ensTextFields = new JTextField[4];
         this.panelMdpCopy  = new JPanel[4];
         this.ensBtnCopy    = new JButton[4];
+        this.lblPassword   = new JPasswordField();
+        this.lblPassword.setFont( new Font ("Arial", Font.PLAIN, 20));
 
 
         for (int i =0; i < 4; i++)
@@ -40,11 +42,17 @@ public class PanelMain extends JPanel implements ActionListener
             this.ensJLabels[i] = new JLabel( this.txtLabel[i], JLabel.CENTER);
             this.ensJLabels[i].setFont( new Font ("Arial", Font.PLAIN, 20));
 
+
             this.ensTextFields[i] = new JTextField ( 20 );
             this.ensTextFields[i].setFont( new Font ("Arial", Font.PLAIN, 20));
             this.ensTextFields[i].setText("Aucun compte selectionné");
+            this.ensTextFields[i].setForeground(Color.BLACK);
+            this.ensTextFields[i].setEditable( false );
 
-            if (i < 3) this.ensBtnCopy[i] = new JButton("copy");
+
+
+
+            if (i <  3) this.ensBtnCopy[i] = new JButton("copy");
             else this.ensBtnCopy[i] = new JButton("supprimer compte");
 
             this.ensBtnCopy[i].setBackground( new Color(158, 158, 158));
@@ -63,8 +71,19 @@ public class PanelMain extends JPanel implements ActionListener
             this.add( this.ensJLabels[i] );
 
             // mdp + copy
-            this.panelMdpCopy[i].add( this.ensTextFields[i]);
-            this.panelMdpCopy[i].add( this.ensBtnCopy[i], BorderLayout.EAST);
+            if (i != 2 )
+            {
+                this.panelMdpCopy[i].add( this.ensTextFields[i]);
+                this.ensTextFields[i].setBackground(Color.WHITE);
+                this.panelMdpCopy[i].add( this.ensBtnCopy[i], BorderLayout.EAST);
+            }
+            else
+            {
+                this.panelMdpCopy[i].add( this.lblPassword );
+                this.panelMdpCopy[i].add( this.ensBtnCopy[i], BorderLayout.EAST);
+
+            }
+
 
             this.add (this.panelMdpCopy[i]);
         }
@@ -104,6 +123,7 @@ public class PanelMain extends JPanel implements ActionListener
         {
             testData = new StringSelection( this.ctrl.getMdp() );
             c.setContents(testData, testData);
+
         }
 
         if ( e.getSource() == this.ensBtnCopy[3] ) this.ctrl.removeAccount();
@@ -111,9 +131,8 @@ public class PanelMain extends JPanel implements ActionListener
     }
 
     public void setLink(String link) { this.ensTextFields[0].setText(link);}
-    public void setId  (String id  ) { this.ensTextFields[1].setText(id)  ;}
-    public void setMdp (String mdp ) { this.ensTextFields[2].setText(mdp) ;}
+    public void setId  (String id  ) { this.ensTextFields[1].setText(id  );}
+    public void setMdp (String mdp ) { this.lblPassword.setText(mdp )     ;}
     public void setNote(String note) { this.ensTextFields[3].setText(note);}
-
 
 }

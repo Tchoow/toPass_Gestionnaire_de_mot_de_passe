@@ -32,10 +32,10 @@ public class Metier
           //renvoie true s'il y a une autre ligne à lire
           while(scanner.hasNextLine())
           {
-            String[] parts = scanner.nextLine().split(":");
-            this.ensMdp.add(new MotDePasse(parts[0], parts[1], parts[2], parts[3], parts[4]));
+            String[] parts = scanner.nextLine().split(";");
+            this.ensMdp.add(new MotDePasse(this.decode(parts[0]), this.decode(parts[1]), this.decode(parts[2]), this.decode(parts[3]), this.decode(parts[4])));
           }
-          scanner.close();    
+          scanner.close();
         }
         catch(IOException e)
         {
@@ -76,12 +76,35 @@ public class Metier
             out.println(sRet);
             out.close();
         } catch (IOException e) {
-            //exception handling left as an exercise for the reader
+            System.out.println("Erreur de lecture");
         }
     }
 
     public void deleteCompte(int numCompte)
     {
       System.out.println("A FAIRE");
+    }
+
+
+
+    public String encode(String str)
+    {
+        String sRet = "";
+        for (int i=0; i < str.length(); i++) { sRet +=  "" + (char) ( ( (int) str.charAt(i) ) + 5 ); }
+        return sRet;
+    }
+
+    public String decode(String str)
+    {
+        String sRet = "";
+        for (int i=0; i < str.length(); i++) { sRet +=  "" + (char) ( ( (int) str.charAt(i) ) - 5 ); }
+        return sRet;
+    }
+
+    public String generate()
+    {
+        String sRet = "";
+        for (int i = 0; i < 15; i++) { sRet += "" + (char) ((int)(Math.random() * 50) + 75); }
+        return sRet;
     }
 }

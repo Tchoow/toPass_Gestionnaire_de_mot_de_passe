@@ -53,15 +53,29 @@ public class FrameAddMdp extends JFrame implements ActionListener
             String link;
             String note;
 
-            if ( this.panelInfo.getLink().equals("") )link = "{absent}"; 
-            else link = this.panelInfo.getLink();
+            if ( this.panelInfo.getLink().equals("") )
+            {
+                link = "{absent}";
+            }
+            else
+            {
+                link = this.panelInfo.getLink();
+                link = this.ctrl.encode(link);
+            }
 
-            if ( this.panelInfo.getNote().equals("") )note = "{absent}";
-            else note = this.panelInfo.getNote();
+            if ( this.panelInfo.getNote().equals("") )
+            {
+                note = "{absent}";
+            }
+            else
+            {
+                note = this.panelInfo.getNote();
+                note = this.ctrl.encode(note);
+            }
 
 
-            sRet=this.panelInfo.getName() + ":" + link + ":" +
-            this.panelInfo.getId()   + ":" + this.panelInfo.getMdp()  + ":" +
+            sRet=this.ctrl.encode(panelInfo.getName()) + ";" + link + ";" +
+            this.ctrl.encode(panelInfo.getId())  + ";" + this.ctrl.encode(this.panelInfo.getMdp())  + ";" +
             note;
             
             this.ctrl.ajouterCompte(sRet);

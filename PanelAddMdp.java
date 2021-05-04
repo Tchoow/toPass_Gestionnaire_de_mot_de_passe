@@ -1,4 +1,5 @@
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.*;
@@ -9,6 +10,8 @@ public class PanelAddMdp extends JPanel
     private JTextField[] txtInfo;
     private JLabel[] lblInfo;
     private String[] textLabel = {"Nom :", "Lien[0..1] :", "Identifiant", "Mot de passe", "Notes[0..1] :"};
+    private JPanel pnlPassword;
+    private JButton btnGeneratePassword;
 
     public PanelAddMdp(Controleur ctrl)
     {
@@ -20,8 +23,10 @@ public class PanelAddMdp extends JPanel
 		/* Création des  composants   */
 		/*----------------------------*/
 
-        this.txtInfo = new JTextField[5];
-        this.lblInfo = new JLabel[5];
+        this.txtInfo             = new JTextField[5];
+        this.lblInfo             = new JLabel[5];
+        this.pnlPassword         = new JPanel( new BorderLayout() );
+        this.btnGeneratePassword = new JButton( "Gpass");
 
         for (int i = 0 ; i < 5; i++)
         {
@@ -35,12 +40,22 @@ public class PanelAddMdp extends JPanel
 		/*--------------------------------*/
 		/* positionnement des  composants */
 		/*--------------------------------*/
-
+        this.pnlPassword.add(lblInfo[3]);
+        this.pnlPassword.add(btnGeneratePassword, BorderLayout.EAST);
 
         for (int i = 0 ; i <  5; i++)
         {
-            this.add( this.lblInfo[i] );
-            this.add( this.txtInfo[i] );
+            if ( i!=3)
+            {
+                this.add( this.lblInfo[i] );
+                this.add( this.txtInfo[i] );
+            }
+            else
+            {
+                this.add( this.pnlPassword);
+                this.add( this.txtInfo[i] );
+            }
+
         }
 
 
